@@ -20,7 +20,7 @@ ct gets added to cts with a new line character at the end. The encrypted *cts* v
 We have no way to calculate the key, that is used to encrypt the messages, but we have a momentarily snapshot with our encrypted_messages.txt file
 and with our key from the dialog.txt file. So we can try to reconstruct and decrypt our encrypted_messages.
 Let's analyze how the encryption works:
-´´´python
+```python
 def twistedColumnarEncrypt(pt, key):
     derived_key = deriveKey(key)
 
@@ -32,7 +32,7 @@ def twistedColumnarEncrypt(pt, key):
     ct = [blocks[derived_key.index(i + 1)][::-1] for i in range(width)]
     ct = flatten(ct)
     return ct
-´´´
+```
 
 We see that some list operations are done. The encryption mechanism slices the message in blocks of the size **width** and transposes these blocks.
 The values of each block are also reversed. In the end the list is flattened and returned as a string.
@@ -47,7 +47,7 @@ encrypting it and feeding it to the decrypt function.
 After that we have to take the first characters in every block and put them in the first block, then take the second characters of each block and put them in the second block and so on and on.
 The second to last step is to reverse the strings in each block again.
 Last but not least we can flatten the array and print it out.
-´´´python
+```python
 def twistedColumnarDecrypt(cipher, key):
     #print(cipher)
     ct_array = []
@@ -81,7 +81,7 @@ def twistedColumnarDecrypt(cipher, key):
         decrypted += string
 
     print(f'{decrypted}\n')
-´´´
+```
 If we did everything correct, we get 4 lines of readable strings with length of 105 characters in the terminal.
 We have to put spaces after the words and we can then search for the string "*HTB*".
 The flag is in the format: **HTB{SOMETHING}**
