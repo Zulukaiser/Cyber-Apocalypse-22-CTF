@@ -4,28 +4,28 @@
 In this challenge we were given a python script called "*source.py*" and a Docker instance.
 Let's connect with the Docker instance.
 
-´´´console
+```console
 connect $IP $PORT
-´´´
+```
 
 When we connect with the instance some text is displayed and we are prompted to "*Enter The Public Key of The Memory:*".
 Obviously we don't know the public key of the memory. But we can check the "*source.py*" file.
 When we look at the python script, we can see some server stuff happening, which we can ignore. We should take a closer look to the *main()* function.
 We can see the text that is printed on the terminal if we access the docker instance. Aslo we see a variable *c* and a variable *C* as well as a input variable *M* which are equal to:
 
-´´´python
+```python
 c = random.randrange(2, p - 1)
 C = pow(g, c, p)
 M = recieveMessage(s, "Enter The Public Key of The Memory: ")
-´´´
+```
 
 We know that p is a huge number, so we can't predict what *c* or *C* are. But we can set the value of *M* with our user input.
 
 Further down in the *main()* function, a new variable calles *shared_secret* is introduced.
 
-´´´python
+```python
 shared_secret = pow(M, c, p)
-´´´
+```
 
 As we know *c* is an unpredictabel, huge number and *p* also, but we can have an influence on *M* let's figure out how we can know the shared_secret.
 
@@ -46,9 +46,9 @@ We now should make our *encrypt()* function. We need to provide the *shared_secr
 Now we calculate the **key** and **cipher** exactly the same as *source.py* does in the *decrypt()* function.
 After that we encrypt our message:
 
-´´´python
+```python
 encrypted_message = cipher.encrypt(plain.encode(encoding = 'UTF-8'))
-´´´
+```
 Perfect! Now we have to call our *encrypt()* function in the *main()* function and provide it with the *shared_secret* which should be equal to 0 and the plain text,
 which is our *sequence*. Run the script and you should get your hex string which you can provide as the second input.
 If we connect to the docker instance again, we give 0 as **M** and our hex string as **encrypted_sequence**.
