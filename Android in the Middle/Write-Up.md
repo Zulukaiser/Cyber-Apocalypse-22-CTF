@@ -4,7 +4,7 @@
 In this challenge we were given a python script called "*source.py*" and a Docker instance.
 Let's connect with the Docker instance.
 
-´´´bash
+´´´console
 connect $IP $PORT
 ´´´
 
@@ -22,6 +22,7 @@ M = recieveMessage(s, "Enter The Public Key of The Memory: ")
 We know that p is a huge number, so we can't predict what *c* or *C* are. But we can set the value of *M* with our user input.
 
 Further down in the *main()* function, a new variable calles *shared_secret* is introduced.
+
 ´´´python
 shared_secret = pow(M, c, p)
 ´´´
@@ -44,6 +45,7 @@ I just copied the *source.py* file and replaced the server stuff with some local
 We now should make our *encrypt()* function. We need to provide the *shared_secret* and the *encrypted_sequence* variable.
 Now we calculate the **key** and **cipher** exactly the same as *source.py* does in the *decrypt()* function.
 After that we encrypt our message:
+
 ´´´python
 encrypted_message = cipher.encrypt(plain.encode(encoding = 'UTF-8'))
 ´´´
