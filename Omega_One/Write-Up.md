@@ -11,39 +11,39 @@ Some names in the function **_FUN_00100b4c_** are behind a DAT-block and not in 
 Let's bring the *output.txt* file into our thoughts. We know that each name corresponds to a character. Maybe we can map those characters to the *output.txt* file.
 We get the following results:
 
-H Crerceon
-T Ezains
-B Ummuh
-{ Zonnu
-l Vinzo
-1 Cuzads
-n Emoi
-3 Ohols
-4 Groz'ens
-r Ukox
-_ Ehnu
-t Pheilons
-1 Cuzads
-m Khehlan
-3 Ohols
-_ Ehnu
-b Munis
-u Inphas
-t Pheilons
-_ Ehnu
-p Dut
-r Ukox
-3 Ohols
-t Pheilons
-t Pheilons
-y Zimil
-_ Ehnu
-s Honzor
-l Vinzo
-0 Ukteils
-w Falnain
-! Dhohmu
-} Baadix
++ H Crerceon
++ T Ezains
++ B Ummuh
++ { Zonnu
++ l Vinzo
++ 1 Cuzads
++ n Emoi
++ 3 Ohols
++ 4 Groz'ens
++ r Ukox
++ _ Ehnu
++ t Pheilons
++ 1 Cuzads
++ m Khehlan
++ 3 Ohols
++ _ Ehnu
++ b Munis
++ u Inphas
++ t Pheilons
++ _ Ehnu
++ p Dut
++ r Ukox
++ 3 Ohols
++ t Pheilons
++ t Pheilons
++ y Zimil
++ _ Ehnu
++ s Honzor
++ l Vinzo
++ 0 Ukteils
++ w Falnain
++ ! Dhohmu
++ } Baadix
 
 This seems to be our flag already!
 
