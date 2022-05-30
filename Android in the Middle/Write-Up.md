@@ -12,6 +12,7 @@ When we connect with the instance some text is displayed and we are prompted to 
 Obviously we don't know the public key of the memory. But we can check the "*source.py*" file.
 When we look at the python script, we can see some server stuff happening, which we can ignore. We should take a closer look to the *main()* function.
 We can see the text that is printed on the terminal if we access the docker instance. Aslo we see a variable *c* and a variable *C* as well as a input variable *M* which are equal to:
+
 ´´´python
 c = random.randrange(2, p - 1)
 C = pow(g, c, p)
