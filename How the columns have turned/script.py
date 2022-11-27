@@ -22,12 +22,9 @@ def flatten(array):
 
 def twistedColumnarDecrypt(cipher, key):
     derived_key = deriveKey(key) # Get derived_key
-    new_key = []
     width = len(key)
     length = int(len(cipher)/width) # Get length of sublists, after transposing in the enryption function
-    for i in range(width):  # Generate new_key
-        a = derived_key.index(i + 1) + 1
-        new_key.append(a)
+    new_key = [derived_key.index(i + 1) + 1 for i in range(width)]  # Generate new_key
 
     ct_array = [cipher[i:i + length] for i in range(0, len(cipher), length)] # Slice the cipher in sublists with corresponding length
     blocks = [ct_array[new_key.index(i + 1)][::-1] for i in range(width)]   # Order the sublists according to the new_key
