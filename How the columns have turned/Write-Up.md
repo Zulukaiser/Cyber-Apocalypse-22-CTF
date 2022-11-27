@@ -39,50 +39,25 @@ The values of each block are also reversed. In the end the list is flattened and
 Now that we know how the encryption works, we can write our own script to decrypt our messages.
 
 First we can calculate the **derived_key** by providing the function *deriveKey()* our key from the dialog.txt file.
-Then we can calculate our **width**, which is 15 and can then slice our encrypted_message into an array.
+Then we can calculate our **width**, which is 15. We need to create a **new_key**, because in Line 32 we take the sublist of blocks on the index where **derived_key** has the value i+1 from 1 to 15. So we need to reverse this indexing technique by doing the exact same as in Line 32, but we will do the same technique as in Line 32 again later in the code. We also need to calculate our new subarray length by dividing the length of the cipher by the **width**.We can then slice our encrypted_message into a list called **ct_array**, by doing Line 29, so to speak the exact same operation as in the encryption function. After that we need to order the sublists with our **new_key**. Second to last we transpose this list and flatten it. Voila we have our decryption working!
 
-Now we can make a new array and feed it with the blocks in order of the derived_key.
-We then can switch the new blocks around to fit them together. I just tried the values out, by making a known plain text,
-encrypting it and feeding it to the decrypt function.
-After that we have to take the first characters in every block and put them in the first block, then take the second characters of each block and put them in the second block and so on and on.
-The second to last step is to reverse the strings in each block again.
-Last but not least we can flatten the array and print it out.
 ```python
 def twistedColumnarDecrypt(cipher, key):
-    #print(cipher)
-    ct_array = []
-    derived_key = [13, 5, 14, 10, 3, 8, 15, 4, 6, 9, 1, 11, 2, 7, 12]
+    derived_key = deriveKey(key)
+    new_key = []
     width = len(key)
-    ct_array = [cipher[i:i + 7] for i in range(0, len(cipher), 7)]
-    new_ct_array = [ct_array[derived_key.index(i + 1)][::-1] for i in range(width)]
-    offset = 1
-    final_ct = [new_ct_array[2-offset], new_ct_array[3-offset], new_ct_array[7-offset], new_ct_array[9-offset], new_ct_array[14-offset], new_ct_array[4-offset], new_ct_array[12-offset], new_ct_array[10-offset], new_ct_array[8-offset], new_ct_array[6-offset], new_ct_array[13-offset], new_ct_array[1-offset], new_ct_array[5-offset], new_ct_array[15-offset], new_ct_array[11-offset]]
-    decrypted = ""
-    for j in range(7):    
-        for i in range(width):
-            string = final_ct[i]
-            val = string[j]
-            decrypted += val
+    length = int(len(cipher)/width)
+    for i in range(width):
+        a = derived_key.index(i + 1) + 1
+        new_key.append(a)
 
-    array_rev = ['', '', '', '', '', '', '']
-    cnt = 0
-    for i in range(0, 105, 15):
-        string = ''
-        for j in range(15):
-            string += decrypted[i+j]
-        array_rev[cnt]= string
-        cnt = cnt + 1
-
-    array_rev = array_rev[::-1]
-
-    decrypted = ""
-    for j in range(7):    
-        string = array_rev[j]
-        decrypted += string
-
-    print(f'{decrypted}\n')
+    ct_array = [cipher[i:i + length] for i in range(0, len(cipher), length)]
+    blocks = [ct_array[new_key.index(i + 1)][::-1] for i in range(width)]
+    blocks = transpose(blocks)
+    pt = flatten(blocks)
+    return pt
 ```
-If we did everything correct, we get 4 lines of readable strings with length of 105 characters in the terminal.
+If we did everything correct, we get an *output.txt* file where we have the decrypted lines.
 We have to put spaces after the words and we can then search for the string "*HTB*".
 The flag is in the format: **HTB{SOMETHING}**
 Now the content in the brackets is everything after the *HTB* string in line 3.
