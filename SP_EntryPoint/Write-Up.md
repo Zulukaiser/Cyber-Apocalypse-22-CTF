@@ -15,6 +15,7 @@ The input gets compared in line 19 and 20. Let's have a closer look at those 2 l
 First our inserted number is compared to 1 if this check fails, our number gets compared to 2.
 If the check with 2 is true, we call the function *check_pass()* every other input will result in the program exiting.
 So let's have a look at the *check_pass()* function.
+
 ![Ghidra checkPass](SP_Entrypoint-Ghidra-checkPass.png)
 
 We can see yet another input that gets read in in line 15. This input gets compared to "*0nlyTh30r1g1n4lCr3wM3mb3r5C4nP455*".
