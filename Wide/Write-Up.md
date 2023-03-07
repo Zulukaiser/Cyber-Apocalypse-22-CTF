@@ -8,6 +8,7 @@ We can ttry some numbers. At number 6 we get to an encrypted dimension, where we
 Obviously we don't have the password, so let's fire up Ghidra and look at the code.
 We can navigate to the functions folder and look at the *main()* function.
 ![Ghidra main](Wide-Ghidra-main.png)
+
 There is nothing out of the ordinary, just some file checking. But in line 45 we call the function *menu()*
 So let's have a look at that:
 ![Ghidra menu](Wide-Ghidra-menu.png)
